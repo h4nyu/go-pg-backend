@@ -11,6 +11,8 @@ services:
       - ./app:/go/src/app
     environment:
       DBSTRING: "host=db user=app password=app sslmode=disable"
+    depends_on:
+      - migrate
 
   migrate:
     build:
@@ -24,6 +26,8 @@ services:
     environment:
       GOOSE_DRIVER: postgres
       GOOSE_DBSTRING: "host=db user=app password=app sslmode=disable"
+    depends_on:
+      - db
 
   db:
     image: postgres

@@ -6,7 +6,6 @@ CREATE TABLE users (
     created_at timestamp NOT NULL
 );
 
-
 -- +goose Down
 DROP EXTENSION "uuid-ossp";
 DROP TABLE users;
