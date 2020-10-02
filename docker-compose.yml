@@ -4,8 +4,26 @@ services:
   app:
     build:
       context: ./app
+      args:
+        - http_proxy
+        - https_proxy
     volumes:
       - ./app:/go/src/app
+    environment:
+      DB_CONN: "host=db user=app password=app sslmode=disable"
+
+  migrate:
+    build:
+      context: ./migrate
+      args:
+        - http_proxy
+        - https_proxy
+    volumes:
+      - ./migrate:/go/src/migrate
+    environment:
+      GOOSE_DRIVER: postgres
+      GOOSE_DBSTRING: "host=db user=app password=app sslmode=disable"
+
   db:
     image: postgres
     environment:
