@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   app:
-    build: &app-build
+    build:
       context: ./app
-      args:
-        - http_proxy
+    volumes:
+      - ./app:/go/src/app
   db:
     image: postgres
     environment:
