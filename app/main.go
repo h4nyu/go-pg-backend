@@ -60,7 +60,7 @@ func rowToUser(row *sql.Row) (*User, error) {
 
 func fetchUser(db *sql.DB, userId string) (*User, error)  {
     row:= db.QueryRow("SELECT * FROM users WHERE id = $1", userId)
-    fmt.Println(&row)
+    fmt.Printf("%+v", row)
     if row != nil {
         return nil, nil
     }
