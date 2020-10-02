@@ -10,7 +10,7 @@ services:
     volumes:
       - ./app:/go/src/app
     environment:
-      DB_CONN: "host=db user=app password=app sslmode=disable"
+      DBSTRING: "host=db user=app password=app sslmode=disable"
 
   migrate:
     build:
@@ -20,6 +20,7 @@ services:
         - https_proxy
     volumes:
       - ./migrate:/go/src/migrate
+    command: goose up
     environment:
       GOOSE_DRIVER: postgres
       GOOSE_DBSTRING: "host=db user=app password=app sslmode=disable"
